@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'geekdict'
+require 'geekdict/cli'
+
+GeekDict::CLI.start(ARGV)
