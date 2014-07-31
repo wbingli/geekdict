@@ -7,8 +7,10 @@ module GeekDict
 	  desc "t", "Translate a word"
 	  option :lang, :aliases=>'-l'
 	  def t(word)
-	    puts "Translating #{word} ..."
-	    puts "Options : #{options[:lang]}"
+	    result = GeekDict::Youdao.translate word
+	    output = result.join "\n"
+	    puts output
+	    output
 	  end
 
 	end
