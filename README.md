@@ -19,6 +19,25 @@ Commands
 	vi. 试验；测试
 	n. (Test)人名；(英)特斯特
 
+Command Help
+------------
+Use *help* command to get detail information.
+
+	$geekdict
+	Commands:
+	  geekdict help [COMMAND]  # Describe available commands or one specific command
+	  geekdict t               # Translate a word
+
+	$geekdict help t
+	Usage:
+	  geekdict t
+
+	Options:
+	  -d, [--debug], [--no-debug]  
+
+	Translate a word
+
+
 TODOs
 -----
 It's under active development until it satisfy my needs. Below are something in my mind:
