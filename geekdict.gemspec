@@ -13,9 +13,12 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "geekdict"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files = %w[LICENSE README.md geekdict.gemspec Gemfile Rakefile]
+  s.files += Dir.glob("bin/**/*")
+  s.files += Dir.glob("lib/**/*.rb")
+  s.files += Dir.glob("spec/**/*")
+  s.test_files    = Dir.glob("spec/**/*")
+  s.executables   =  %w[geekdict]
   s.require_paths = ["lib"]
 
   s.add_development_dependency "rake"

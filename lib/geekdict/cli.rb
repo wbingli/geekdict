@@ -6,7 +6,9 @@ module GeekDict
 
 	  desc "t", "Translate a word"
 	  option :lang, :aliases=>'-l'
+	  option :debug, :aliases=>'-d', :type=>:boolean,:default=>false
 	  def t(word)
+		GeekDict.debugger options[:debug]
 	    result = GeekDict::Youdao.translate word
 	    output = result.join "\n"
 	    puts output
@@ -15,4 +17,3 @@ module GeekDict
 
 	end
 end
- 
