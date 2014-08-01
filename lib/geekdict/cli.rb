@@ -5,7 +5,6 @@ module GeekDict
 	class CLI < Thor
 
 	  desc "t", "Translate a word"
-	  option :lang, :aliases=>'-l'
 	  option :debug, :aliases=>'-d', :type=>:boolean,:default=>false
 	  def t(word)
 		GeekDict.debugger options[:debug]
