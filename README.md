@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/geekdict.svg)](http://badge.fury.io/rb/geekdict)
+
 Geek Dict
 ---------
 A command line tool for translation.
