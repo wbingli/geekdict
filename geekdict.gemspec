@@ -7,7 +7,8 @@ Gem::Specification.new do |s|
   s.version     = GeekDict::VERSION
   s.authors     = ["Bruce Li"]
   s.email       = ["wbinglee@gmail.com"]
-  s.homepage    = ""
+  s.licenses = ['MIT']
+  s.homepage    = "https://github.com/wbinglee/geekdict"
   s.summary     = %q{A command line tool for translation.}
   s.description = %q{A command line tool for translation.}
 
