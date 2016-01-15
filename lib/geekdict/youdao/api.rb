@@ -10,6 +10,10 @@ module GeekDict
 
 		module_function
 
+    def url(word)
+      "http://dict.youdao.com/search?q=#{word}"
+    end
+
 		def translate(word)
 			@debugger = GeekDict.debugger
 			client = HTTPClient.new

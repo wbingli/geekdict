@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$: << File.dirname(__FILE__) + "/../lib"
+
+require 'pry'
+
+require 'geekdict'
+require 'geekdict/cli'
+
+pry.config.color = false
+binding.pry self
+

@@ -6,13 +6,20 @@ module GeekDict
 
         desc "t", "Translate a word"
         option :debug, :aliases=>'-d', :type=>:boolean,:default=>false
+        option :open, :aliases => '-o', :type => :boolean, :default=> false
         def t(word)
             GeekDict.debugger options[:debug]
             LocalHistory.save word
-            result = GeekDict::Youdao.translate word
-            output = result.join "\n"
-            puts output
-            output
+            if options[:open]
+              page = GeekDict::Youdao.url word
+              puts "Open Web page : #{page}"
+              `open #{page}`
+            else
+              result = GeekDict::Youdao.translate word
+              output = result.join "\n"
+              puts output
+              output
+            end
         end
 
     end
