@@ -46,6 +46,7 @@ Development
 ```
 bin/console
 pry>GeekDict::CLI.start(['t','test'])
+```
 
 TODOs
 -----
