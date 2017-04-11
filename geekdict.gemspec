@@ -5,7 +5,7 @@ require "geekdict/version"
 Gem::Specification.new do |s|
   s.name        = "geekdict"
   s.version     = GeekDict::VERSION
-  s.authors     = ["Bruce Li"]
+  s.authors     = ["Wenbing Li"]
   s.email       = ["wbinglee@gmail.com"]
   s.licenses = ['MIT']
   s.homepage    = "https://github.com/wbinglee/geekdict"
@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry"
   s.add_development_dependency "rspec", "~> 2.13.0"
 
-  s.add_runtime_dependency "thor", "~> 0.19.1"
-  s.add_runtime_dependency "httpclient", "~> 2.4.0"
+  s.add_runtime_dependency "thor", "~> 0.19.4"
+  s.add_runtime_dependency "httpclient", "~> 2.8.3"
 
 end
