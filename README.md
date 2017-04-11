@@ -2,7 +2,7 @@
 
 Geek Dict
 ---------
-A command line tool for translation.
+A command line tool for English-Chinese translation.
 
 Install
 -------
@@ -48,12 +48,20 @@ bin/console
 pry>GeekDict::CLI.start(['t','test'])
 ```
 
-TODOs
------
-It's under active development until it satisfy my needs. Below are something in my mind:
-* geekdict list  : List all words you have searched
-* geekdict remove : Remove word you know from your new words list
-* Use google translate engine as alternative, as well as supporting other target language. Low priority, only focus on Chinese.
+### Test
+```
+rspec
+```
+
+### Build
+```
+gem build geekdict.gemspec
+```
+
+### Publish
+```
+gem push geekdict-<VERSION>.gem
+```
 
 License
 -------
