@@ -1,5 +1,7 @@
 require "thor"
 require_relative 'local_history'
+require_relative 'version'
+
 module GeekDict
 
     class CLI < Thor
@@ -20,6 +22,11 @@ module GeekDict
               puts output
               output
             end
+        end
+
+        desc "v", "version"
+        def v()
+          puts GeekDict::VERSION
         end
 
     end
