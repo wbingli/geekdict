@@ -18,7 +18,7 @@ module GeekDict
             { role: "system", content: system_prompt(word)},
             { role: "user", content: word}
           ], 
-          temperature: 0.7,
+          temperature: 0.2,
         })
       return response.dig("choices", 0, "message", "content")
 		end
