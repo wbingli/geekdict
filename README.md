@@ -10,6 +10,10 @@ You can install via rubygems:
 
 	gem install geekdict
 
+Configure
+--------
+This translate uses OpenAI's GPT-3.5. Ensure you have `OPENAI_API_KEY` configured as environment variable.
+
 
 Commands
 --------
