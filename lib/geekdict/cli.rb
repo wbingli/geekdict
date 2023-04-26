@@ -1,6 +1,7 @@
 require "thor"
 require_relative 'local_history'
 require_relative 'version'
+require_relative 'openai/gpt.rb'
 
 module GeekDict
 
@@ -12,16 +13,8 @@ module GeekDict
         def t(word)
             GeekDict.debugger options[:debug]
             LocalHistory.save word
-            if options[:open]
-              page = GeekDict::Youdao.url word
-              puts "Open Web page : #{page}"
-              `open #{page}`
-            else
-              result = GeekDict::Youdao.translate word
-              output = result.join "\n"
-              puts output
-              output
-            end
+            result = GeekDict::OpenAI.translate word
+            puts result
         end
 
         desc "v", "version"

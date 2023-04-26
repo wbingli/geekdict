@@ -26,7 +26,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry"
   s.add_development_dependency "rspec", "~> 2.13.0"
 
-  s.add_runtime_dependency "thor", "~> 0.19.4"
-  s.add_runtime_dependency "httpclient", "~> 2.8.3"
+  s.add_runtime_dependency "thor", "~> 1.2.1"
+  s.add_runtime_dependency "httpclient", "~> 2.7.1"
+  s.add_runtime_dependency "ruby-openai"
 
 end
