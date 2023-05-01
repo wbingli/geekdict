@@ -29,5 +29,4 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "thor", "~> 1.2.1"
   s.add_runtime_dependency "httpclient", "~> 2.7.1"
   s.add_runtime_dependency "ruby-openai"
-
 end
