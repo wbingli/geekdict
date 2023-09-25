@@ -20,10 +20,19 @@ Commands
 ### Translate a word
 
 	$geekdict t test
-	n. 试验；检验
-	vt. 试验；测试
-	vi. 试验；测试
-	n. (Test)人名；(英)特斯特
+	测试 (cè shì)
+
+	Explanation:
+	The word "测试" in Chinese means "test" in English. It refers to the process of evaluating or examining something to determine its quality, performance, or knowledge. It can be used in various contexts, such as academic exams, software testing, or product quality testing.
+	
+	Example:
+	1. 我们明天有一场数学测试。
+	(Wǒmen míngtiān yǒu yī chǎng shùxué cèshì.)
+	We have a math test tomorrow.
+	
+	2. 这个软件需要经过严格的测试才能发布。
+	(Zhège ruǎnjiàn xūyào jīngguò yángé de cèshì cáinéng fābù.)
+	This software needs to undergo rigorous testing before it can be released.
 
 Command Help
 ------------
