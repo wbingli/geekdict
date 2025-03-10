@@ -12,14 +12,25 @@ You can install via rubygems:
 
 Configure
 --------
-This translate uses OpenAI's GPT-3.5. Ensure you have `OPENAI_API_KEY` configured as environment variable.
+GeekDict supports multiple translation providers:
+
+1. **OpenRouter** (default): Uses the openai/o3-mini model through OpenRouter. Set the `OPENROUTER_API_KEY` environment variable.
+2. **OpenAI**: Uses OpenAI's GPT-3.5. Set the `OPENAI_API_KEY` environment variable.
+3. **Youdao**: Uses Youdao translation API. Configure in `~/.geekdict.yml`.
 
 
 Commands
 --------
 ### Translate a word
 
+	# Using the default OpenRouter provider
 	$geekdict t test
+	
+	# Specify a provider
+	$geekdict t test -p openai
+	$geekdict t test --provider=youdao
+	
+	# Example output
 	测试 (cè shì)
 
 	Explanation:
@@ -27,11 +38,9 @@ Commands
 	
 	Example:
 	1. 我们明天有一场数学测试。
-	(Wǒmen míngtiān yǒu yī chǎng shùxué cèshì.)
 	We have a math test tomorrow.
 	
 	2. 这个软件需要经过严格的测试才能发布。
-	(Zhège ruǎnjiàn xūyào jīngguò yángé de cèshì cáinéng fābù.)
 	This software needs to undergo rigorous testing before it can be released.
 
 Command Help
@@ -50,6 +59,7 @@ Use *help* command to get detail information.
 	Options:
   -d, [--debug], [--no-debug]
   -o, [--open], [--no-open]
+  -p, [--provider=PROVIDER]      # Translation provider to use (openrouter, openai, youdao)
 
 	Translate a word
 

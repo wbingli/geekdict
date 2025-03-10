@@ -1,6 +1,8 @@
 require 'geekdict/cli'
 require 'geekdict/debugger'
 require 'geekdict/youdao/api'
+require 'geekdict/openai/gpt'
+require 'geekdict/openrouter/api'
 
 module GeekDict
 

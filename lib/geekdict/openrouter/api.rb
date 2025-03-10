@@ -1,27 +1,41 @@
 require 'json'
-require 'openai'
+require 'httpclient'
 
 module GeekDict
-	module OpenAI
+  module OpenRouter
+    module_function
 
-		#Youdao API version
-
-		module_function
-
-		def translate(word)
-			@debugger = GeekDict.debugger
-			client = ::OpenAI::Client.new(access_token: ENV.fetch('OPENAI_API_KEY'))
-      response = client.chat(
-        parameters: {
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: system_prompt(word)},
-            { role: "user", content: word}
-          ], 
-          temperature: 0.2,
-        })
-      return response.dig("choices", 0, "message", "content")
-		end
+    def translate(word)
+      @debugger = GeekDict.debugger
+      
+      client = HTTPClient.new
+      headers = {
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{ENV.fetch('OPENROUTER_API_KEY')}"
+      }
+      
+      body = {
+        model: 'openai/o3-mini',
+        messages: [
+          { role: "system", content: system_prompt(word) },
+          { role: "user", content: word }
+        ],
+        temperature: 0.2
+      }
+      
+      response = client.post(
+        'https://openrouter.ai/api/v1/chat/completions',
+        body.to_json,
+        headers
+      )
+      
+      if response.status == 200
+        result = JSON.parse(response.body)
+        result.dig("choices", 0, "message", "content")
+      else
+        "Error: Failed to get translation (#{response.status})"
+      end
+    end
 
     def system_prompt(word)
       <<-EOS
@@ -45,5 +59,5 @@ module GeekDict
       Keep explanations clear and concise. Do NOT include pinyin in Chinese text.
       EOS
     end
-	end
+  end
 end
