@@ -43,6 +43,7 @@ Settings are applied in the following order (highest priority first):
 2.  Values in `~/.geekdict.config`
 3.  Hardcoded defaults
 
+
 Commands
 --------
 ### Translate a word (`t`)
@@ -119,6 +120,21 @@ Options:
                                          # Default: false
 
 Translate a word
+```
+
+### Shell Alias (Optional)
+
+For faster access, you can create a shell alias. Add the following line to your shell configuration file (e.g., `~/.bashrc`, `~/.zshrc`):
+
+```bash
+alias t='geekdict t'
+```
+
+After adding the alias and restarting your shell or sourcing the configuration file (e.g., `source ~/.zshrc`), you can simply use `t` instead of `geekdict t`:
+
+```bash
+# Instead of: geekdict t hello
+t hello
 ```
 
 Development
