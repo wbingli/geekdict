@@ -119,6 +119,8 @@ Options:
                                          # Default: false
 
 Translate a word
+```
+
 Development
 ----------
 ```
