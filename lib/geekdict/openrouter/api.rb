@@ -15,7 +15,9 @@ module GeekDict
       client = HTTPClient.new
       headers = {
         'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{ENV.fetch('OPENROUTER_API_KEY')}"
+        'Authorization' => "Bearer #{ENV.fetch('OPENROUTER_API_KEY')}",
+        'HTTP-Referer' => 'https://github.com/wbingli/geekdict/', # Identify app
+        'X-Title' => 'GeekDict' # Set app title
       }
       
       body = {
