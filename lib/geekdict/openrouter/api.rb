@@ -5,9 +5,13 @@ module GeekDict
   module OpenRouter
     module_function
 
-    def translate(word)
+    # Update translate method to accept model
+    def translate(word, model: nil) # Add model keyword argument
       @debugger = GeekDict.debugger
       
+      # Use the provided model, or fallback to a default if nil (though CLI should provide one)
+      effective_model = model || 'google/gemini-2.5-flash-preview' # Fallback, though CLI provides default
+
       client = HTTPClient.new
       headers = {
         'Content-Type' => 'application/json',
@@ -15,7 +19,7 @@ module GeekDict
       }
       
       body = {
-        model: 'openai/o3-mini',
+        model: effective_model, # Use the determined model
         messages: [
           { role: "system", content: system_prompt(word) },
           { role: "user", content: word }

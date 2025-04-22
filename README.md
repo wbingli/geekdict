@@ -12,58 +12,113 @@ You can install via rubygems:
 
 Configure
 --------
-GeekDict supports multiple translation providers:
+GeekDict requires API keys for certain providers, set as environment variables:
 
-1. **OpenRouter** (default): Uses the openai/o3-mini model through OpenRouter. Set the `OPENROUTER_API_KEY` environment variable.
-2. **OpenAI**: Uses OpenAI's GPT-3.5. Set the `OPENAI_API_KEY` environment variable.
-3. **Youdao**: Uses Youdao translation API. Configure in `~/.geekdict.yml`.
+*   **OpenRouter**: Set `OPENROUTER_API_KEY`.
+*   **OpenAI**: Set `OPENAI_API_KEY`.
+*   **Youdao**: Configuration for Youdao keys is typically handled within its specific module or a separate config file if needed (refer to Youdao provider specifics if used).
 
+### Configuration File (Optional)
+
+You can customize the default provider and model by creating a configuration file at `~/.geekdict.config`. The file should be in YAML format.
+
+**Example `~/.geekdict.config`:**
+
+```yaml
+provider: openrouter # 'openai', 'openrouter', or 'youdao'
+model: google/gemini-2.5-flash-preview # Specific model for the chosen provider
+```
+
+**Defaults:**
+
+*   If the config file is not present or a setting is missing, the tool defaults to:
+    *   `provider: openrouter`
+    *   `model: google/gemini-2.5-flash-preview`
+
+**Prioritization:**
+
+Settings are applied in the following order (highest priority first):
+
+1.  Command-line options (`--provider`, `--model`)
+2.  Values in `~/.geekdict.config`
+3.  Hardcoded defaults
 
 Commands
 --------
-### Translate a word
+### Translate a word (`t`)
 
-	# Using the default OpenRouter provider
-	$geekdict t test
-	
-	# Specify a provider
-	$geekdict t test -p openai
-	$geekdict t test --provider=youdao
-	
-	# Example output
-	测试 (cè shì)
+Translates a given word between English and Chinese.
 
-	Explanation:
-	The word "测试" in Chinese means "test" in English. It refers to the process of evaluating or examining something to determine its quality, performance, or knowledge. It can be used in various contexts, such as academic exams, software testing, or product quality testing.
-	
-	Example:
-	1. 我们明天有一场数学测试。
-	We have a math test tomorrow.
-	
-	2. 这个软件需要经过严格的测试才能发布。
-	This software needs to undergo rigorous testing before it can be released.
+**Usage:**
+
+```bash
+geekdict t [options] <word>
+```
+
+**Options:**
+
+*   `-p, --provider PROVIDER`: Specify the translation provider (`openai`, `openrouter`, `youdao`). Overrides config file setting.
+*   `-m, --model MODEL`: Specify the LLM model to use (e.g., `gpt-4`, `google/gemini-pro`). Overrides config file setting.
+*   `-d, --debug`: Enable debug output.
+*   `-o, --open`: (Functionality might vary - check specific provider usage)
+
+**Examples:**
+
+```bash
+# Use defaults (provider/model from CLI -> config -> hardcoded defaults)
+$ geekdict t hello
+
+# Specify provider (uses default/config model for that provider)
+$ geekdict t hello -p openai
+
+# Specify model (uses default/config provider)
+$ geekdict t hello -m gpt-4
+
+# Specify both provider and model
+$ geekdict t hello --provider openrouter --model anthropic/claude-3-haiku
+
+# Use Youdao provider (model option typically ignored)
+$ geekdict t hello -p youdao
+```
+
+**Example Output (using an LLM provider):**
+
+```
+Translation: 你好 (nǐ hǎo)
+
+Explanation:
+"你好" (nǐ hǎo) is the standard Mandarin Chinese greeting equivalent to "hello" in English. It's a polite and common way to greet someone.
+
+Examples:
+1. 你好，请问有什么可以帮您的吗？
+   Hello, may I help you with anything?
+2. 他笑着对我说你好。
+   He smiled and said hello to me.
+```
 
 Command Help
 ------------
-Use *help* command to get detail information.
+Use the `help` command to get detailed information about commands and options.
 
-	$geekdict
-	Commands:
-	  geekdict help [COMMAND]  # Describe available commands or one specific command
-	  geekdict t               # Translate a word
+```bash
+$ geekdict help
+Commands:
+  geekdict help [COMMAND]  # Describe available commands or one specific command
+  geekdict t <word>        # Translate a word
+  geekdict v               # Show version
 
-	$geekdict help t
-	Usage:
-	  geekdict t
+$ geekdict help t
+Usage:
+  geekdict t [options] <word>
 
-	Options:
+Options:
   -d, [--debug], [--no-debug]
   -o, [--open], [--no-open]
-  -p, [--provider=PROVIDER]      # Translation provider to use (openrouter, openai, youdao)
+  -p, [--provider=PROVIDER]              # Provider (overrides config: openai/openrouter/youdao)
+  -m, [--model=MODEL]                    # LLM model (overrides config)
+                                         # Default: false
 
-	Translate a word
-
-
+Translate a word
 Development
 ----------
 ```

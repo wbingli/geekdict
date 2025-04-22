@@ -8,12 +8,16 @@ module GeekDict
 
 		module_function
 
-		def translate(word)
+    # Update translate method to accept model
+		def translate(word, model: nil) # Add model keyword argument
 			@debugger = GeekDict.debugger
+      # Use the provided model, or fallback to a default if nil
+      effective_model = model || "gpt-3.5-turbo" # Fallback model for OpenAI
+
 			client = ::OpenAI::Client.new(access_token: ENV.fetch('OPENAI_API_KEY'))
       response = client.chat(
         parameters: {
-          model: "gpt-3.5-turbo",
+          model: effective_model, # Use the determined model
           messages: [
             { role: "system", content: system_prompt(word)},
             { role: "user", content: word}
