@@ -13,6 +13,8 @@ module GeekDict
       effective_model = model || 'google/gemini-2.5-flash-preview' # Fallback, though CLI provides default
 
       client = HTTPClient.new
+      # OpenRouter is stateless; avoid parsing unsupported SameSite cookie attributes.
+      client.cookie_manager = nil
       headers = {
         'Content-Type' => 'application/json',
         'Authorization' => "Bearer #{ENV.fetch('OPENROUTER_API_KEY')}",
