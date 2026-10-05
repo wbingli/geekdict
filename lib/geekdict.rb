@@ -3,6 +3,7 @@ require 'geekdict/debugger'
 require 'geekdict/youdao/api'
 require 'geekdict/openai/gpt'
 require 'geekdict/openrouter/api'
+require 'geekdict/gemini/api'
 
 module GeekDict
 
