@@ -2,46 +2,45 @@ require 'json'
 require 'httpclient'
 
 module GeekDict
-  module OpenRouter
+  module Gemini
     module_function
 
-    # Update translate method to accept model
-    def translate(word, model: nil) # Add model keyword argument
+    API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models'
+
+    # Calls the Gemini API (Google AI Studio) directly. Requires GEMINI_API_KEY.
+    def translate(word, model: nil)
       @debugger = GeekDict.debugger
-      
-      # Use the provided model, or fallback to a default if nil (though CLI should provide one)
-      effective_model = model || 'google/gemini-3.5-flash-lite' # Fallback, though CLI provides default
+
+      # Accept OpenRouter-style IDs (google/gemini-...) so the same config works for both providers.
+      effective_model = (model || 'gemini-3.5-flash-lite').delete_prefix('google/')
 
       client = HTTPClient.new
-      # OpenRouter is stateless; avoid parsing unsupported SameSite cookie attributes.
       client.cookie_manager = nil
       headers = {
         'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{ENV.fetch('OPENROUTER_API_KEY')}",
-        'HTTP-Referer' => 'https://github.com/wbingli/geekdict/', # Identify app
-        'X-Title' => 'GeekDict' # Set app title
+        'x-goog-api-key' => ENV.fetch('GEMINI_API_KEY')
       }
-      
+
+      # Temperature is left at the model default: Google recommends 1.0 for Gemini 3+ models.
+      # Flash-Lite already defaults to minimal thinking, so no thinkingConfig is needed.
       body = {
-        model: effective_model, # Use the determined model
-        messages: [
-          { role: "system", content: system_prompt(word) },
-          { role: "user", content: word }
-        ],
-        temperature: 0.2
+        systemInstruction: { parts: [{ text: system_prompt(word) }] },
+        contents: [{ role: 'user', parts: [{ text: word }] }]
       }
-      
+
       response = client.post(
-        'https://openrouter.ai/api/v1/chat/completions',
+        "#{API_BASE}/#{effective_model}:generateContent",
         body.to_json,
         headers
       )
-      
+
+      result = JSON.parse(response.body) rescue {}
       if response.status == 200
-        result = JSON.parse(response.body)
-        result.dig("choices", 0, "message", "content")
+        parts = result.dig('candidates', 0, 'content', 'parts') || []
+        parts.reject { |part| part['thought'] }.map { |part| part['text'] }.join
       else
-        "Error: Failed to get translation (#{response.status})"
+        message = result.dig('error', 'message')
+        "Error: Failed to get translation (#{response.status})#{": #{message}" if message}"
       end
     end
 

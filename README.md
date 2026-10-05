@@ -14,6 +14,7 @@ Configure
 --------
 GeekDict requires API keys for certain providers, set as environment variables:
 
+*   **Gemini** (default): Set `GEMINI_API_KEY`. Create a key at [Google AI Studio](https://aistudio.google.com/apikey); `gemini-3.5-flash-lite` is available on the free tier.
 *   **OpenRouter**: Set `OPENROUTER_API_KEY`.
 *   **OpenAI**: Set `OPENAI_API_KEY`.
 *   **Youdao**: Configuration for Youdao keys is typically handled within its specific module or a separate config file if needed (refer to Youdao provider specifics if used).
@@ -25,15 +26,15 @@ You can customize the default provider and model by creating a configuration fil
 **Example `~/.geekdict.config`:**
 
 ```yaml
-provider: openrouter # 'openai', 'openrouter', or 'youdao'
-model: google/gemini-2.5-flash-preview # Specific model for the chosen provider
+provider: gemini # 'gemini', 'openai', 'openrouter', or 'youdao'
+model: gemini-3.5-flash-lite # Specific model for the chosen provider (OpenRouter uses prefixed IDs, e.g. google/gemini-3.5-flash-lite)
 ```
 
 **Defaults:**
 
 *   If the config file is not present or a setting is missing, the tool defaults to:
-    *   `provider: openrouter`
-    *   `model: google/gemini-2.5-flash-preview`
+    *   `provider: gemini`
+    *   `model: gemini-3.5-flash-lite`
 
 **Prioritization:**
 
@@ -58,7 +59,7 @@ geekdict t [options] <word>
 
 **Options:**
 
-*   `-p, --provider PROVIDER`: Specify the translation provider (`openai`, `openrouter`, `youdao`). Overrides config file setting.
+*   `-p, --provider PROVIDER`: Specify the translation provider (`gemini`, `openai`, `openrouter`, `youdao`). Overrides config file setting.
 *   `-m, --model MODEL`: Specify the LLM model to use (e.g., `gpt-4`, `google/gemini-pro`). Overrides config file setting.
 *   `-d, --debug`: Enable debug output.
 *   `-o, --open`: (Functionality might vary - check specific provider usage)
@@ -115,7 +116,7 @@ Usage:
 Options:
   -d, [--debug], [--no-debug]
   -o, [--open], [--no-open]
-  -p, [--provider=PROVIDER]              # Provider (overrides config: openai/openrouter/youdao)
+  -p, [--provider=PROVIDER]              # Provider (overrides config: gemini/openai/openrouter/youdao)
   -m, [--model=MODEL]                    # LLM model (overrides config)
                                          # Default: false
 
