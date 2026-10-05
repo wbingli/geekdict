@@ -5,6 +5,7 @@ require_relative 'version'
 require_relative 'config' # Add require for the new config module
 require_relative 'openai/gpt.rb'
 require_relative 'openrouter/api.rb'
+require_relative 'gemini/api.rb'
 # Assuming youdao might be added later or is handled elsewhere
 # require_relative 'youdao/api.rb'
 require_relative 'youdao/api.rb' # Keep youdao require
@@ -46,6 +47,8 @@ module GeekDict
 
       # 5. Call the appropriate provider with the word and model
       result = case provider
+               when 'gemini'
+                 GeekDict::Gemini.translate(word, model: model)
                when 'openai'
                  # TODO: Update OpenAI class to accept model
                  GeekDict::OpenAI.translate(word, model: model)

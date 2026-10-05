@@ -4,9 +4,9 @@ require "fileutils"
 module GeekDict
   module Config
     CONFIG_PATH = File.expand_path("~/.geekdict.config")
-    DEFAULT_PROVIDER = "openrouter"
-    DEFAULT_MODEL = "google/gemini-2.5-flash-lite"
-    ALLOWED_PROVIDERS = ['openai', 'openrouter', 'youdao'].freeze
+    DEFAULT_PROVIDER = "gemini"
+    DEFAULT_MODEL = "gemini-3.5-flash-lite"
+    ALLOWED_PROVIDERS = ['gemini', 'openai', 'openrouter', 'youdao'].freeze
 
     module_function
 
